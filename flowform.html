@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Flow Form</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="css\style.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\menu.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\form.css?v3">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="js\jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div class="container_16">
+<div>
+	<input type="button" class="refresh" name="import" value="Import" style="display: none;">
+</div>
+<div id="menu" class="grid_16"></div>
+<div id="main" class="grid_16">
+
+<form  id="flowmod" action="action" method="post" class="space-y-6">
+		<!-- Submit + Clear -->
+	<div class="formcontrol flex gap-4">
+		<button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+			Submit
+		</button>
+		<button type="reset" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
+			Clear
+		</button>	
+	</div>
+
+	<div class="form">
+		
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Target</h2>
+			<div>
+				<label for="dpid" class="block mb-1 font-medium text-gray-700">Switch ID</label>
+				<select id="dpid"
+				class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">
+				<!-- Options dynamiques -->
+				</select>
+			</div>
+			<div>
+				<label for="table_id" class="block mb-1 font-medium text-gray-700">Table ID</label>
+				<input type="number" id="table_id" min="0" value="0"
+				class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">
+			</div>
+		</div>
+
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Flow Operation</h2>
+			<div class="operation space-y-2">
+				<label class="flex items-center gap-2">
+					<input type="radio" id="op1"name="operation" value="add" checked class="text-indigo-600"> Add
+					</label>
+					<label class="flex items-center gap-2">
+					<input type="radio" id="op2"name="operation" value="mod" class="text-indigo-600"> Modify
+					</label>
+					<label class="flex items-center gap-2">
+					<input type="radio" id="op3" name="operation" value="modst" class="text-indigo-600"> Modify Strict
+					</label>
+					<label class="flex items-center gap-2">
+					<input type="radio" id="op4" name="operation" value="del" class="text-indigo-600"> Delete
+					</label>
+					<label class="flex items-center gap-2">
+					<input type="radio" id="op5"name="operation" value="delst" class="text-indigo-600"> Delete Strict
+				</label>
+			</div>
+		</div>
+
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Match Fields</h2>
+			<div class="flex items-center gap-2">
+					<input type="checkbox" id="matchcheckbox" class="text-indigo-600">
+					<label for="matchcheckbox" class="font-medium text-gray-700">Match Any</label>
+			</div>
+			<div id="matchdiv" class="overflow-x-auto">
+				<table id="matchtable" class="extendable min-w-full border border-gray-200 mb-4">
+					<thead class="bg-indigo-100">
+						<tr>
+						<th class="px-4 py-2 text-left text-indigo-800">Match Field</th>
+						<th class="px-4 py-2 text-left text-indigo-800">Value</th>
+						<th class="px-4 py-2"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="border-t">
+						<td class="px-4 py-2">
+							<input list="matchlist" name="matchfield"
+							class="border border-gray-300 rounded px-2 py-1 w-full">
+						</td>
+						<td class="px-4 py-2">
+							<input type="text" name="matchvalue"
+							class="border border-gray-300 rounded px-2 py-1 w-full">
+						</td>
+							<td><input type="button" name="bmatch" value="+"></td>
+							<td class="px-4 py-2">
+							<button type="button"
+							class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"></button>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Settings</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div>
+				<label for="priority" class="block mb-1 font-medium text-gray-700">Priority</label>
+				<input type="number" id="priority" min="0" placeholder="Entry priority"
+					class="w-full border border-gray-300 rounded px-3 py-2">
+				</div>
+				<div>
+				<label for="idle_timeout" class="block mb-1 font-medium text-gray-700">Idle Timeout</label>
+				<input type="number" id="idle_timeout" min="0" placeholder="Seconds"
+					class="w-full border border-gray-300 rounded px-3 py-2">
+				</div>
+				<div>
+				<label for="hard_timeout" class="block mb-1 font-medium text-gray-700">Hard Timeout</label>
+				<input type="number" id="hard_timeout" min="0" placeholder="Seconds"
+					class="w-full border border-gray-300 rounded px-3 py-2">
+				</div>
+				<div>
+				<label for="cookie" class="block mb-1 font-medium text-gray-700">Cookie</label>
+				<input type="number" id="cookie" min="0" placeholder="Integer"
+					class="w-full border border-gray-300 rounded px-3 py-2">
+				</div>
+				<div>
+				<label for="cookie_mask" class="block mb-1 font-medium text-gray-700">Cookie Mask</label>
+				<input type="number" id="cookie_mask" min="0" placeholder="Integer"
+					class="w-full border border-gray-300 rounded px-3 py-2">
+				</div>
+			</div>
+			<span id="out_fields">
+				<label for="out_port" class="block mb-1 font-medium text-gray-700">Output Port:</label>
+				<input type="number" id="out_port" min="-1" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="port number or -1 for ANY" disabled="true"><br>
+				<label for="out_group"class="block mb-1 font-medium text-gray-700" >Output Group:</label>
+				<input type="number" id="out_group" min="-1" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="group id or -1 for ANY" disabled="true"><br>
+			</span>
+		</div>
+	</div>
+	<div class="form">
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Instructions</h2>
+			<div>
+				<label for="meter_id" class="block mb-1 font-medium text-gray-700">Goto Meter</label>
+				<input type="number" id="meter_id" placeholder="Meter ID or -1 for All"
+				class="w-full border border-gray-300 rounded px-3 py-2">
+			</div>
+
+			<div class="overflow-x-auto">
+				<h3 class="font-semibold text-indigo-600">Apply Actions</h3>
+				<table id="applytable" class=" extendable min-w-full border border-gray-200 mb-4">
+				<thead class="bg-indigo-100">
+					<tr>
+					<th class="px-4 py-2 text-left text-indigo-800">Action Type</th>
+					<th class="px-4 py-2 text-left text-indigo-800">Value</th>
+					<th class="px-4 py-2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-t">
+					<td class="px-4 py-2">
+						<input list="actionlist" name="applyaction"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<input type="text" name="applyvalue"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<button type="button"name="bapply" value="+"
+						class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+					</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+
+					
+				<!-- Clear Actions -->
+				<div class="flex items-center gap-2">
+					<input type="checkbox" id="clearactions" class="text-indigo-600">
+					<label for="clearactions" class="font-medium text-gray-700">Clear Actions</label>
+				</div>
+
+				<!-- Write Actions -->
+                    <div class="overflow-x-auto">
+                        <h3 class="font-semibold text-indigo-600">Write Actions</h3>
+                        <table id="writetable" class="extendable min-w-full border border-gray-200 mb-4">
+                        <thead class="bg-indigo-100">
+                            <tr>
+                            <th class="px-4 py-2 text-left text-indigo-800">Action Type</th>
+                            <th class="px-4 py-2 text-left text-indigo-800">Value</th>
+                            <th class="px-4 py-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t">
+                            <td class="px-4 py-2">
+                                <input list="actionlist" name="writeaction"
+                                class="border border-gray-300 rounded px-2 py-1 w-full">
+                            </td>
+                            <td class="px-4 py-2">
+                                <input type="text" name="writevalue"
+                                class="border border-gray-300 rounded px-2 py-1 w-full">
+                            </td>
+                            <td class="px-4 py-2">
+                                <button type="button" name="bwrite" value="+"
+                                class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+                            </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+				<br>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+					<label for="metadata" class="block mb-1 font-medium text-gray-700">Write Metadata</label>
+					<input type="number" id="metadata" placeholder="integer"
+						class="w-full border border-gray-300 rounded px-3 py-2">
+					</div>
+					<div>
+					<label for="metadata_mask" class="block mb-1 font-medium text-gray-700">Metadata Mask</label>
+					<input type="number" id="metadata_mask" placeholder="integer"
+						class="w-full border border-gray-300 rounded px-3 py-2">
+					</div>
+					<div>
+					<label for="goto" class="block mb-1 font-medium text-gray-700">Goto Table</label>
+					<input type="number" id="goto" placeholder="table_id" min="1"
+						class="w-full border border-gray-300 rounded px-3 py-2">
+					</div>
+				</div>
+		</div>
+
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-2">
+			<h2 class="text-xl font-semibold text-indigo-700">Flags</h2>
+			<div class="flex flex-col gap-2">
+				<label class="flex items-center gap-2">
+				<input type="checkbox" id="SEND_FLOW_REM" class="text-indigo-600"> Send flow-removed msg
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="checkbox" id="CHECK_OVERLAP" class="text-indigo-600"> Check overlapping
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="checkbox" id="RESET_COUNTS" class="text-indigo-600"> Reset counts
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="checkbox" id="NO_PKT_COUNTS" class="text-indigo-600"> Do not count packets
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="checkbox" id="NO_BYT_COUNTS" class="text-indigo-600"> Do not count bytes
+				</label>
+			</div>
+		</div>
+		 <datalist id="actionlist">
+		<option value="OUTPUT"></option>
+		<option value="DROP"></option>
+		<option value="SET_FIELD"></option>
+		</datalist>
+	</div>
+</form>
+<div id="output"></div>
+<div id="snackbar"></div>
+</div>
+</div>
+<script src="js\mainmenu.js"></script>
+<script src="js\flowfill.js?v2"></script>
+<script src="js\flowmodvalidate.js?v2"></script>
+<script src="js\flowmod.js?v2"></script>
+</body>
+</html>

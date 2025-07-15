@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Group Control</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="css\style.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\menu.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\form.css?v3">
+	<script src="js\jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div class="container_16">
+<div>
+	<input type="button" class="refresh" name="import" value="Import" style="display: none;">
+</div>
+<div id="menu" class="grid_16"></div>
+<div id="main" class="grid_16">
+
+<form  id="groupmod" action="action" method="post" class="space-y-6">
+		<!-- Form Buttons -->
+		<div class="flex gap-4">
+			<button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+				Submit
+			</button>
+			<button type="reset" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
+				Clear
+			</button>
+		</div>
+
+		<div class="form">
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Target</h2>
+			<div>
+				<label for="dpid" class="block font-medium text-gray-700 mb-1">Switch ID</label>
+				<select id="dpid"
+				class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">
+				<!-- Options dynamiques -->
+				</select>
+			</div>
+
+			<div>
+				<label for="group_id" class="block font-medium text-gray-700 mb-1">Group ID</label>
+				<input type="number" id="group_id" min="1"
+				class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500" />
+			</div>
+
+			<div>
+				<label for="gtype" class="block font-medium text-gray-700 mb-1">Group Type</label>
+				<select id="gtype"
+				class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">
+				<option value="ALL">ALL</option>
+				<option value="SELECT">SELECT</option>
+				<option value="INDIRECT">INDIRECT</option>
+				<option value="FAST_FAILOVER">FAST_FAILOVER</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="fieldset bg-white p-6 rounded-lg shadow space-y-4">
+			<h2 class="text-xl font-semibold text-indigo-700">Group Operation</h2>
+			<div class="space-y-2">
+				<label class="flex items-center gap-2">
+				<input type="radio" id="op1" name="operation" value="add" checked class="text-indigo-600">
+				Add
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="radio" id="op2" name="operation" value="mod" class="text-indigo-600">
+				Modify
+				</label>
+				<label class="flex items-center gap-2">
+				<input type="radio" id="op3" name="operation" value="del" class="text-indigo-600">
+				Delete
+				</label>
+			</div>
+		</div>
+
+
+
+	</div>
+	<div class="form">
+    	<div class="fieldset bg-white p-6 rounded-lg shadow space-y-6">
+			 <h2 class="text-xl font-semibold text-indigo-700">Action Buckets</h2>
+
+			<table id="Bucket_1" class="extendablemin-w-full border border-gray-200 mb-4 ">
+				<thead class="bg-indigo-100">
+					<tr>
+						<th class="px-4 py-2 text-left text-indigo-800">Action Type</th>
+						<th class="px-4 py-2 text-left text-indigo-800">Value</th>
+						<th class="px-4 py-2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-t">
+					<td class="px-4 py-2">
+						<input list="actionlist" name="applyaction"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<input type="text" name="applyvalue"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<button type="button"name="bapply" value="+"
+						class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="Bucket_2" class="extendablemin-w-full border border-gray-200 mb-4 ">
+				<thead class="bg-indigo-100">
+					<tr>
+						<th class="px-4 py-2 text-left text-indigo-800">Action Type</th>
+						<th class="px-4 py-2 text-left text-indigo-800">Value</th>
+						<th class="px-4 py-2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-t">
+					<td class="px-4 py-2">
+						<input list="actionlist" name="applyaction"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<input type="text" name="applyvalue"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<button type="button"name="bapply" value="+"
+						class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="Bucket_3" class="extendablemin-w-full border border-gray-200 mb-4 ">
+				<thead class="bg-indigo-100">
+					<tr>
+						<th class="px-4 py-2 text-left text-indigo-800">Action Type</th>
+						<th class="px-4 py-2 text-left text-indigo-800">Value</th>
+						<th class="px-4 py-2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-t">
+					<td class="px-4 py-2">
+						<input list="actionlist" name="applyaction"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<input type="text" name="applyvalue"
+						class="border border-gray-300 rounded px-2 py-1 w-full">
+					</td>
+					<td class="px-4 py-2">
+						<button type="button"name="bapply" value="+"
+						class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+	  </div>
+	  <datalist id="actionlist">
+		<!-- Exemples d'actions OpenFlow -->
+		<option value="OUTPUT"></option>
+		<option value="SET_FIELD"></option>
+		<option value="DROP"></option>
+		</datalist>
+
+	</div>
+</form>
+<div id="output"></div>
+<div id="snackbar"></div>
+</div>
+</div>
+<script src="js\mainmenu.js"></script>
+<script src="js\groupmodvalidate.js?v2"></script>
+<script src="js\groupmod.js?v2"></script>
+</body>
+</html>

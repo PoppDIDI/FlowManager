@@ -1,0 +1,79 @@
+/*
+    Copyright (c) Maen Artimy, 2018
+*/
+
+@import "colors.css";
+
+/* Nouveau style pour le menu horizontal */
+.topmenu {
+  display: flex;         /* Aligne en ligne */
+  justify-content: center; /* Centre horizontalement */
+  flex-wrap: wrap;       /* Permet de passer à la ligne si trop petit */
+  gap: 8px;              /* Espace entre les liens */
+  padding: 10px;         /* Optionnel: espacement interne */
+margin: 15px;
+}
+
+.topmenu a {
+  display: inline-block; /* Important: horizontal */
+  padding: 8px 15px;
+  background-color: rgba(8, 53, 126, 0.5);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.topmenu a:hover {
+  background-color: rgba(12, 41, 88, 0.5);
+  color: black;
+}
+
+.topmenu a.active {
+  background-color: rgba(12, 41, 88, 0.5);
+  color: black;
+}
+
+/*.logowrapper {
+  font: normal 11px Verdana, Arial, Helvetica, sans-serif;
+  position: fixed;
+  bottom: 0;
+	z-index: 1;
+}
+
+.logowrapper img {
+	margin: 0px 0px 10px 15px;
+}*/
+
+/* copyright notice */
+/*.logowrapper p {
+	margin: 0px 0px -10px 10px;
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+}*/
+
+.logowrapper {
+  position: fixed;
+  bottom: 0;
+	z-index: 1;
+  background: transparent url("../img/Logo_300x300.png") no-repeat left top;
+  background-size: 115px 115px;
+  width: 115px;
+  height: 115px;
+  margin: -60px 0px 5px 10px;
+  border-radius: 5px;
+  /*border: var(--pcolor-0) solid 2px;*/
+}
+
+/* Style the navigation menu */
+.topmenu {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+#myLinks {
+  display: none;
+  margin-left: 20px;
+
+}

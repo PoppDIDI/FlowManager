@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Configuration Backup/Restore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="css\style.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\menu.css?v2">
+	<link rel="stylesheet" type="text/css" href="css\form.css?v3">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="js\jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div class="container_16">
+<div id="menu" class="grid_16"></div>
+<div id="main" class="grid_16">
+
+<form  id="confbackup" action="action" method="post" class="space-y-8">
+    <div class="fieldset bg-white p-6 rounded-lg shadow-md">
+       <h2 class="text-xl font-semibold mb-4 text-indigo-700">Backup</h2>
+        <label for="dpid" class="block mb-2 font-medium text-gray-700">Select Switches</label>
+        <select id="dpid" multiple size="5"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">
+            <option value="ALL" selected>--ALL--</option>
+        </select>
+
+        <div class="flex items-center mt-4">
+            <input id="pretty" type="checkbox" class="mr-2">
+            <label for="pretty" class="text-gray-700">Formatted</label>
+        </div>
+
+        <button type="submit" name="save"
+            class="mt-4 inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+            Save Backup
+        </button>
+    </div>
+
+    <div class="fieldset bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4 text-indigo-700">Restore</h2>
+        <h2 class="text-xl font-semibold mb-4 text-indigo-700">Restore</h2>
+        <label for="chooseMeterFile" class="block mb-2 font-medium text-gray-700">Choose Backup File</label>
+        <input type="file" name="chooseFile" id="chooseMeterFile"
+            class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4
+            file:rounded-md file:border-0
+            file:text-sm file:font-semibold
+            file:bg-indigo-50 file:text-indigo-700
+            hover:file:bg-indigo-100">
+
+        <button type="submit" name="restore"
+            class="mt-4 inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+            disabled>
+            Restore
+        </button>
+    </div>
+
+    <!-- BACKUP CONTENT -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4 text-indigo-700">Backup Content</h2>
+    <textarea id="confcontent" rows="6" readonly
+        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500">No content...</textarea>
+    </div>
+</form>
+
+<div id="output"></div>
+<div id="snackbar"></div>
+</div>
+</div>
+<script src="js\mainmenu.js"></script>
+<script src="js\common.js"></script>
+<script src="js\config.js"></script>
+</body>
+</html>
+
+
+  
